@@ -1,0 +1,3 @@
+[submodule "documentation/doc2md/sub/markitdown"]
+	path = documentation/doc2md/sub/markitdown
+	url = https://github.com/microsoft/markitdown.git
