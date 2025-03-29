@@ -8,9 +8,10 @@ fi
 
 # Arguments
 repo_url=$1 # https://github.com/microsoft/markitdown.git 
-#submodule_path="$PWD/documentation/doc2md/manage/submodule/markitdown"
+submodule_sub_path="/documentation/doc2md/sub/markitdown"
+submodule_path=".$submodule_sub_path"
 
-submodule_path="./markitdown"
+#submodule_path="./markitdown"
 
 
 
@@ -32,4 +33,31 @@ else
 fi
 
 
+# Step 2: Pull the latest changes for the submodule
+echo "Pulling latest changes for the submodule..."
+git submodule update --remote 
+
+# Final Message
+echo "Submodule setup and update complete. The submodule has been added/updated."
+
+
+gitignore_dest="$PWD$submodule_sub_path/../.gitignore"
+
+to_ignore="*\n!.gitignore" 
+
+# Check if the .gitignore file exists, if not create it
+if [ ! -f .gitignore ]; then
+    echo ".gitignore file does not exist. Creating it..."
+    touch $gitignore_dest
+fi
+
+# Check if specifics are already in the .gitignore
+if grep -Pzo "(?s)((\*)|(\!\.gitignore))" "$gitignore_dest" > /dev/null; then  
+    echo "'$to_ignore' is already in .gitignore."
+
+else
+    # Add to .gitignore
+    printf "\n\n$to_ignore\n" >> $gitignore_dest
+    echo "Added '$to_ignore' to '$gitignore_dest'"
+fi
 

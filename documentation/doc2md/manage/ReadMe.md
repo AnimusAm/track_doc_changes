@@ -10,7 +10,7 @@ Creating a submodule, and pulling the changes, is something done occasionally (t
 It's done manually by running the manage_markitdown script:
 
 - in bash console (you can use fore example git bash) run:
-  ``./documentation/doc2md/manage/manage_markitdown.sh https://github.com/microsoft/markitdown.git ./documentation/doc2md/manage/submodule/markitdown``
+  ``./documentation/doc2md/manage/manage_markitdown_copy.sh https://github.com/microsoft/markitdown.git``
 
 
 
