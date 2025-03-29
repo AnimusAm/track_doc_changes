@@ -1,17 +1,21 @@
 #!/bin/bash
 
 # Check if correct number of arguments are passed
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <repository-url> <path-to-submodule>"
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <repository-url>"
     exit 1
 fi
 
 # Arguments
 repo_url=$1 # https://github.com/microsoft/markitdown.git 
-submodule_path=$2 #./markitdown
+#submodule_path="$PWD/documentation/doc2md/manage/submodule/markitdown"
+
+submodule_path="./markitdown"
+
+
 
 # Step 1: Check if the submodule already exists
-if [ -d "$submodule_path" ]; then
+if [ -d "$submodule_path" ] ; then
     echo "Submodule already exists at $submodule_path. Skipping submodule addition."
 else
     # Add the submodule if it doesn't exist
@@ -24,13 +28,8 @@ else
     echo "Committing changes..."
     git add .gitmodules "$submodule_path"
     git commit -m "Added submodule: $submodule_path"
+  
 fi
 
-# Step 2: Pull the latest changes for the submodule
-echo "Pulling latest changes for the submodule..."
-git submodule update --remote 
-git pull --recurse-submodules
 
 
-# Final Message
-echo "Submodule setup and update complete. The submodule has been added/updated."
